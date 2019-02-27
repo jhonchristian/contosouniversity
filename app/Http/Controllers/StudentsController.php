@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Student;
+use Validator;
 
 class StudentsController extends Controller
 {
@@ -13,7 +16,8 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::orderBy('Lastname', 'asc')->paginate(10);
+        return view('students.index')->with('students', $students);
     }
 
     /**
@@ -23,7 +27,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('students.create');
     }
 
     /**
@@ -34,7 +38,32 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'idnumber' => 'required',            
+            'lastname' => 'required|regex:/^[a-zA-z\s]+$/|max: 20',
+            'firstname' => 'required|regex:/^[a-zA-z\s]+$/|max: 20',
+            'middlename' => 'required|regex:/^[a-zA-z\s]+$/|max: 20',
+            'suffix' => 'nullable',
+            'course' => 'nullable',
+            'birthday' => 'required',
+            'phonenumber' => 'required|max:11',
+            'email' => 'required|unique:students'
+        ]);    
+        // Create Student
+        $student = new Student();
+        $student->IDnumber = $request->input('idnumber');
+        $student->Gender = $request->input('gender');
+        $student->Lastname = $request->input('lastname');
+        $student->Suffix = $request->input('suffix');
+        $student->Firstname = $request->input('firstname');
+        $student->Middlename = $request->input('middlename');
+        $student->Course = $request->input('course');
+        $student->Birthday = $request->input('birthday');
+        $student->PhoneNumber = $request->input('phonenumber');
+        $student->Email = $request->input('email');
+        $student->save();
+
+        return redirect('/students')->with('success', 'New Student Added!');
     }
 
     /**
@@ -56,7 +85,8 @@ class StudentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::find($id);
+        return view('students.edit')->with('student', $student);
     }
 
     /**
@@ -68,7 +98,32 @@ class StudentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'idnumber' => 'required',            
+            'lastname' => 'required|regex:/^[a-zA-z\s]+$/|max: 20',
+            'firstname' => 'required|regex:/^[a-zA-z\s]+$/|max: 20',
+            'middlename' => 'required|regex:/^[a-zA-z\s]+$/|max: 20',
+            'suffix' => 'nullable',
+            'course' => 'nullable',
+            'birthday' => 'required',
+            'phonenumber' => 'required|max:11',
+            'email' => 'required'
+        ]);    
+        // update Student
+        $student = Student::find($id);
+        $student->IDnumber = $request->input('idnumber');
+        $student->Gender = $request->input('gender');
+        $student->Lastname = $request->input('lastname');
+        $student->Suffix = $request->input('suffix');
+        $student->Firstname = $request->input('firstname');
+        $student->Middlename = $request->input('middlename');
+        $student->Course = $request->input('course');
+        $student->Birthday = $request->input('birthday');
+        $student->PhoneNumber = $request->input('phonenumber');
+        $student->Email = $request->input('email');
+        $student->save();
+
+        return redirect('/students')->with('success', 'Student Updated!');
     }
 
     /**

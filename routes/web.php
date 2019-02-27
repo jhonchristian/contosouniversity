@@ -12,5 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+// Students Controller
+//Route::resource('students', 'StudentsController');
+Route::get('/students', 'StudentsController@index');
+Route::get('/students/create', 'StudentsController@create');
+Route::post('/students', 'StudentsController@store');
+Route::get('/students/{student}/edit', 'StudentsController@edit');
+Route::put('/students/{student}', 'StudentsController@update');
+// End of Students Controller
