@@ -7,31 +7,33 @@
 
     <div class="container">
         <div class="card-deck text-center">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title"> Students </h2>
-                    <p> Here in Contoso University, we have a list of our imaginary students, so we can track their course and also their teachers. </p>
+            <div class="card-column">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"> Students </h2>
+                        <p> Here in Contoso University, we have a list of our imaginary students, so we can track their course and also their teachers. </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/students" class="card-link">See List</a>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <a href="/students" class="card-link">See List</a>
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"> Teachers </h2>
+                        <p> Here in Contoso University, we have a list of our imaginary Teachers, so we can track their course specialization and students assigned to them. </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/teachers" class="card-link">See List</a>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title"> Teachers </h2>
-                    <p> Here in Contoso University, we have a list of our imaginary Teachers, so we can track their course specialization and students assigned to them. </p>
-                </div>
-                <div class="card-footer">
-                    <a href="/teachers" class="card-link">See List</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title"> Courses </h2>
-                    <p> Here in Contoso University, we have a lot of  imaginary courses that you want to take. </p>      
-                </div>
-                <div class="card-footer">
-                    <a href="/students" class="card-link">See List</a>
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"> Courses </h2>
+                        <p> Here in Contoso University, we have a lot of  imaginary courses that you want to take. </p>      
+                    </div>
+                    <div class="card-footer">
+                        <a href="/students" class="card-link">See List</a>
+                    </div>
                 </div>
             </div>
         </div>

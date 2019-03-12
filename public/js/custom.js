@@ -1,14 +1,16 @@
 function hideSuffix() 
 {
     var gender = document.getElementById('gender');
-    var suffix = document.getElementById('forSuffix');
+    var divSuffix = document.getElementById('forSuffix');
+    var suffix = document.getElementById('suffix');
     var classname = "hidden";    
     if(gender.value == "Female")
     {
-        suffix.classList.add(classname);
+        divSuffix.classList.add(classname);
+        suffix.selectedIndex = 0;
     }
     else 
     {
-        suffix.classList.remove(classname);
+        divSuffix.classList.remove(classname);
     }
 }

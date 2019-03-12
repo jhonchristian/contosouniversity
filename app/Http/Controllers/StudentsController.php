@@ -47,8 +47,27 @@ class StudentsController extends Controller
             'course' => 'nullable',
             'birthday' => 'required',
             'phonenumber' => 'required|max:11',
-            'email' => 'required|unique:students'
+            'email' => 'required|unique:students',
+            'idpicture' => 'image|nullable|max:1999'
         ]);    
+        // Handle File Upload
+        if($request->hasFile('idpicture'))
+        {
+            // Get filename with extension
+            $filenamewithExt = $request->file('idpicture')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenamewithExt, PATHINFO_FILENAME);
+            // Get just Extension
+            $extension = $request->file('idpicture')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('idpicture')->storeAs('public/idpicture', $fileNameToStore);
+        }
+        else 
+        {
+            $fileNameToStore = 'noimage.jpg';
+        }
         // Create Student
         $student = new Student();
         $student->IDnumber = $request->input('idnumber');
@@ -61,6 +80,7 @@ class StudentsController extends Controller
         $student->Birthday = $request->input('birthday');
         $student->PhoneNumber = $request->input('phonenumber');
         $student->Email = $request->input('email');
+        $student->IDpicture = $fileNameToStore;
         $student->save();
 
         return redirect('/students')->with('success', 'New Student Added!');
@@ -74,7 +94,8 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id);
+        return view('students.show')->with('student', $student);
     }
 
     /**
@@ -107,8 +128,24 @@ class StudentsController extends Controller
             'course' => 'nullable',
             'birthday' => 'required',
             'phonenumber' => 'required|max:11',
-            'email' => 'required'
+            'email' => 'required',
+            'idpicture' => 'image|nullable|max:1999'
         ]);    
+        // Handle file upload
+        if($request->hasFile('idpicture'))
+        {
+            // Get filename with extension
+            $filenameWithExt = $request->file('idpicture')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just extension
+            $extension = $request->file('idpicture')->getClientOriginalExtension();
+            // Filename to store
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload image
+            $path = $request->file('idpicture')->storeAs('public/idpicture', $filenameToStore);
+        }
+
         // update Student
         $student = Student::find($id);
         $student->IDnumber = $request->input('idnumber');
@@ -121,6 +158,7 @@ class StudentsController extends Controller
         $student->Birthday = $request->input('birthday');
         $student->PhoneNumber = $request->input('phonenumber');
         $student->Email = $request->input('email');
+        $student->IDpicture = $filenameToStore;
         $student->save();
 
         return redirect('/students')->with('success', 'Student Updated!');

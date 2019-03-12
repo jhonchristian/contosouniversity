@@ -22,4 +22,5 @@ Route::get('/students/create', 'StudentsController@create');
 Route::post('/students', 'StudentsController@store');
 Route::get('/students/{student}/edit', 'StudentsController@edit');
 Route::put('/students/{student}', 'StudentsController@update');
+Route::get('/students/{student}', 'StudentsController@show');
 // End of Students Controller

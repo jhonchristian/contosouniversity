@@ -3,7 +3,13 @@
     <div class="container my-1">
         <a href="/students" class="btn btn-outline-secondary">Go Back</a>
         <h1 class="my-4"> Add New Student </h1>
-        {!! Form::open(['action' => 'StudentsController@store', 'method' => 'POST', 'class' => 'border shadow p-4']) !!}
+        {!! Form::open(['action' => 'StudentsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data' ,'class' => 'border shadow p-4']) !!}
+            <div class="form-group">
+                <div class="custom-file">
+                    {{Form::label('idpicture', 'Choose image', ['class' => 'custom-file-label'])}}
+                    {!!Form::file('idpicture', ['class' => 'custom-file-input'])!!}
+                </div>
+            </div>
             <div class="form-group">
                 {{Form::label('idnumber', 'ID Number')}}
                 {{Form::text('idnumber', '', ['class' => 'form-control', 'placeholder' => 'Enter ID number'])}}
@@ -25,7 +31,7 @@
                     '' => 'None',
                     'Jr.' => 'Jr.',
                     'Sr.' => 'Sr.'
-            ], '', ['class' => 'form-control'])}}
+            ], '', ['class' => 'form-control', 'id' => 'suffix'])}}
             </div>
             <div class="form-group">
                 {{Form::label('firstname', 'First Name')}}

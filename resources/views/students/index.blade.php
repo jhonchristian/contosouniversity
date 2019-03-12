@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    <!-- Modal -->      
+    <!-- End Modal -->
+    </div>
     <div class="container my-4 text-center">
         <h1 class="float-left"> Students </h1>
         <a href="students/create" class="btn btn-outline-primary float-right "> Add </a><br>
@@ -14,26 +17,18 @@
                         <th>Middle Name</th>
                         <th>Suffix</th>
                         <th>Course</th>
-                        <th>Email</th>
-                        <th>PhoneNumber</th>
-                        <th>Birthday</th>
-                        <th>Gender</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach($students as $student)
                     <a href="/students/{{$student->id}}">
                     <tr>
-                        <td><a href="students/{{$student->id}}/edit">{{$student->IDnumber}}</a></td>
-                        <td>{{$student->Lastname}}</td>                        
+                        <td><a href="students/{{$student->id}}">{{$student->IDnumber}}</a></td>
+                        <td>{{$student->Lastname}}</td>           
                         <td>{{$student->Firstname}}</td>
                         <td>{{$student->Middlename}}</td>
                         <td>{{$student->Suffix}}</td>
                         <td>{{$student->Course}}</td>
-                        <td>{{$student->Email}}</td>
-                        <td>{{$student->PhoneNumber}}</td>
-                        <td>{{$student->Birthday}}</td>
-                        <td>{{$student->Gender}}</td>
                     </tr>
                     </a>
                 @endforeach
